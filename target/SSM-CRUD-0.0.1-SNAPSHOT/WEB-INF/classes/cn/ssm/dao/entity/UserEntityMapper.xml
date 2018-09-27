@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ssm.dao.mapper.UserMapper">
+	<!-- 查询全部 -->
+	<select id="selectAllUser" resultType="cn.ssm.dao.entity.UserEntity">
+		select * from user
+	</select>
+	
+	<!-- 传参添加部门信息 -->
+	<insert id="insertUserParams" parameterType="cn.ssm.dao.entity.UserEntity">
+		INSERT INTO user
+		VALUES(#{id},#{name},#{age})
+	</insert>
+
+
+	<!-- ID查询 -->
+	<select id="selectUserById" parameterType="int" resultType="cn.ssm.dao.entity.UserEntity">
+		select * from user
+		where id=#{dn}
+	</select>
+
+	<!-- id删除 -->
+	<delete id="delUserById" parameterType="int">
+		delete from user where
+		id=#{dn}
+	</delete>
+	<!-- id更新 -->
+	<update id="updUserById" parameterType="cn.ssm.dao.entity.UserEntity">
+		update user set
+		name=#{name},age=#{age} where id=#{id}
+	</update>
+
+	<!-- 模糊查询 -->
+	<select id="selectUserByLike" parameterType="java.lang.String"
+		resultType="cn.ssm.dao.entity.UserEntity">
+		SELECT * FROM user WHERE name LIKE CONCAT('%',#{keyWord},'%')
+	</select>
+</mapper>
